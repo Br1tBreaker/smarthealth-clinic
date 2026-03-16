@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartHealth Clinic - AI-Powered Healthcare</title>
+    <meta name="theme-color" content="#00A8E8">
+    <meta name="description" content="AI-Powered Clinic - Smart Healthcare for Myanmar">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background: #f8f9fa;
+            padding-bottom: 70px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #00A8E8, #00D26A);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+        
+        /* AI Banner */
+        .ai-banner {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            margin: 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .ai-icon {
+            font-size: 32px;
+        }
+        
+        /* Services Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin: 30px 0 15px 0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .service-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        /* Doctors */
+        .doctors-list {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .doctor-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .doctor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00A8E8, #00D26A);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .doctor-info {
+            flex: 1;
+        }
+        
+        .doctor-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .doctor-specialty {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        /* AI Symptom Checker */
+        .symptom-checker {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .symptom-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #00A8E8;
+            border-radius: 8px;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        
+        .ai-button {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .ai-button:hover {
+            transform: scale(1.02);
+        }
+        
+        .ai-result {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        /* Appointment Form */
+        .appointment-form {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: #00A8E8;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Health Tips */
+        .health-tips {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tip-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #00D26A;
+        }
+        
+        .tip-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .tip-content {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Bottom Navigation */
+        .nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+        
+        .nav-item.active {
+            color: #00A8E8;
+        }
+        
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 3px;
+        }
+        
+        /* Pages */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Install PWA Banner */
+        .install-banner {
+            background: linear-gradient(135deg, #00A8E8, #00D26A);
+            color: white;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 168, 232, 0.3);
+        }
+        
+        .install-btn {
+            background: white;
+            color: #00A8E8;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 12px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>🏥 SmartHealth Clinic</h1>
+        <p>AI-Powered Healthcare for Myanmar</p>
+    </div>
+    
+    <!-- Install PWA Banner -->
+    <div class="install-banner" id="installBanner">
+        <div>
+            <strong>📱 Install App</strong><br>
+            <small>Install on your phone for easy access</small>
+        </div>
+        <button class="install-btn" onclick="installApp()">Install</button>
+    </div>
+    
+    <!-- Page 1: Home -->
+    <div class="page active" id="homePage">
+        <div class="container">
+            <!-- AI Symptom Checker -->
+            <div class="ai-banner">
+                <div class="ai-icon">🤖</div>
+                <div>
+                    <strong>AI Symptom Checker</strong><br>
+                    <small>Describe your symptoms, get instant advice</small>
+                </div>
+            </div>
+            
+            <div class="symptom-checker">
+                <h3 style="margin-bottom: 10px;">What are your symptoms?</h3>
+                <textarea class="symptom-input" id="symptomInput" rows="3" placeholder="Example: I have fever, headache, and cough for 2 days..."></textarea>
+                <button class="ai-button" onclick="checkSymptoms()">🔍 Get AI Diagnosis</button>
+                <div class="ai-result" id="aiResult"></div>
+            </div>
+            
+            <!-- Services -->
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🩺</div>
+                    <div class="service-name">General Consultation</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💉</div>
+                    <div class="service-name">Vaccinations</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔬</div>
+                    <div class="service-name">Lab Tests</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">❤️</div>
+                    <div class="service-name">Health Checkups</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🦷</div>
+                    <div class="service-name">Dental Care</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👁️</div>
+                    <div class="service-name">Eye Care</div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <h2 class="section-title">Quick Actions</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+                <button class="ai-button" onclick="showPage('appointmentPage')" style="background: #00A8E8;">📅 Book Appointment</button>
+                <button class="ai-button" onclick="showPage('doctorsPage')" style="background: #00D26A;">👨‍⚕️ Our Doctors</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 2: Doctors -->
+    <div class="page" id="doctorsPage">
+        <div class="container">
+            <h2 class="section-title">Our Specialist Doctors</h2>
+            <div class="doctors-list">
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👨‍⚕️</div>
+                    <div class="doctor-info">
+                        <div class="doctor-name">Dr. Thant Zin</div>
+                        <div class="doctor-specialty">General Physician • 15 years experience</div>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👩‍⚕️</div>
+                    <div class="doctor-info">
+                        <div class="doctor-name">Dr. Mya Mya</div>
+                        <div class="doctor-specialty">Pediatrician • 12 years experience</div>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👨‍⚕️</div>
+                    <div class="doctor-info">
+                        <div class="doctor-name">Dr. Kyaw Zaw</div>
+                        <div class="doctor-specialty">Cardiologist • 20 years experience</div>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👩‍⚕️</div>
+                    <div class="doctor-info">
+                        <div class="doctor-name">Dr. Nwe Nwe</div>
+                        <div class="doctor-specialty">Dermatologist • 10 years experience</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 3: Appointments -->
+    <div class="page" id="appointmentPage">
+        <div class="container">
+            <h2 class="section-title">Book an Appointment</h2>
+            <div class="appointment-form">
+                <div class="form-group">
+                    <label>Patient Name</label>
+                    <input type="text" id="patientName" placeholder="Enter patient name">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="patientPhone" placeholder="09XXXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>Select Doctor</label>
+                    <select id="selectDoctor">
+                        <option>Dr. Thant Zin (General Physician)</option>
+                        <option>Dr. Mya Mya (Pediatrician)</option>
+                        <option>Dr. Kyaw Zaw (Cardiologist)</option>
+                        <option>Dr. Nwe Nwe (Dermatologist)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Date</label>
+                    <input type="date" id="appointmentDate">
+                </div>
+                <div class="form-group">
+                    <label>Symptoms/Reason</label>
+                    <textarea id="appointmentReason" rows="3" placeholder="Describe your symptoms..."></textarea>
+                </div>
+                <button class="submit-btn" onclick="bookAppointment()">📅 Book Appointment</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 4: Health Tips -->
+    <div class="page" id="tipsPage">
+        <div class="container">
+            <h2 class="section-title">AI-Generated Health Tips</h2>
+            <div class="health-tips">
+                <div class="tip-card">
+                    <div class="tip-title">💧 Stay Hydrated</div>
+                    <div class="tip-content">Drink at least 8 glasses of water daily. Proper hydration helps maintain body temperature, lubricate joints, and transport nutrients.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">😴 Get Enough Sleep</div>
+                    <div class="tip-content">Adults need 7-9 hours of sleep per night. Good sleep improves memory, mood, and overall health.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">🥗 Eat Balanced Diet</div>
+                    <div class="tip-content">Include fruits, vegetables, whole grains, and lean proteins in your daily meals for optimal health.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">🏃 Exercise Regularly</div>
+                    <div class="tip-content">At least 30 minutes of moderate exercise daily can reduce risk of heart disease, diabetes, and improve mental health.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">🧘 Manage Stress</div>
+                    <div class="tip-content">Practice meditation, deep breathing, or yoga to reduce stress and improve mental wellbeing.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 5: Contact -->
+    <div class="page" id="contactPage">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="appointment-form">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 48px; margin-bottom: 10px;">🏥</div>
+                    <h3 style="color: #00A8E8;">SmartHealth Clinic</h3>
+                    <p style="color: #666; margin-top: 5px;">AI-Powered Healthcare</p>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <div style="margin-bottom: 15px;">
+                        <strong>📍 Address:</strong><br>
+                        <span style="color: #666;">123 Main Street, Yangon, Myanmar</span>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>📞 Phone:</strong><br>
+                        <span style="color: #666;">+95 9 790 123 456</span>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>⏰ Opening Hours:</strong><br>
+                        <span style="color: #666;">Mon - Sat: 9:00 AM - 6:00 PM<br>Sunday: Closed</span>
+                    </div>
+                </div>
+                
+                <button class="ai-button" onclick="window.open('https://wa.me/959790123456', '_blank')" style="background: #25D366; margin-bottom: 10px;">💬 Chat on WhatsApp</button>
+                <button class="ai-button" onclick="window.open('tel:+959790123456')" style="background: #00A8E8;">📞 Call Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="nav">
+        <a href="#" class="nav-item active" onclick="showPage('homePage')">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showPage('doctorsPage')">
+            <span class="nav-icon">👨‍⚕️</span>
+            <span>Doctors</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showPage('appointmentPage')">
+            <span class="nav-icon">📅</span>
+            <span>Book</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showPage('tipsPage')">
+            <span class="nav-icon">💡</span>
+            <span>Tips</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showPage('contactPage')">
+            <span class="nav-icon">📞</span>
+            <span>Contact</span>
+        </a>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2026 SmartHealth Clinic</p>
+        <p>Powered by Zero-Cost Mobile App Factory</p>
+    </div>
+    
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            document.getElementById(pageId).classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+        
+        // AI Symptom Checker
+        function checkSymptoms() {
+            const symptoms = document.getElementById('symptomInput').value;
+            const resultDiv = document.getElementById('aiResult');
+            
+            if (!symptoms) {
+                alert('Please describe your symptoms');
+                return;
+            }
+            
+            // AI-powered symptom analysis (demo)
+            const symptomLower = symptoms.toLowerCase();
+            let diagnosis = '';
+            let advice = '';
+            
+            if (symptomLower.includes('fever') || symptomLower.includes('headache')) {
+                diagnosis = 'Possible Common Cold or Flu';
+                advice = '• Rest and drink plenty of fluids\n• Take paracetamol for fever\n• Monitor temperature\n• If fever persists > 3 days, consult doctor';
+            } else if (symptomLower.includes('cough')) {
+                diagnosis = 'Possible Respiratory Infection';
+                advice = '• Stay hydrated\n• Use honey for dry cough\n• Avoid cold drinks\n• Wear mask to prevent spread';
+            } else if (symptomLower.includes('stomach') || symptomLower.includes('pain')) {
+                diagnosis = 'Possible Digestive Issue';
+                advice = '• Eat bland foods\n• Avoid spicy/oily food\n• Drink ORS if diarrhea\n• Consult doctor if severe pain';
+            } else {
+                diagnosis = 'General Health Concern';
+                advice = '• Monitor symptoms\n• Get adequate rest\n• Stay hydrated\n• Book appointment for proper diagnosis';
+            }
+            
+            resultDiv.innerHTML = `
+                <strong style="color: #00A8E8;">🤖 AI Analysis:</strong><br>
+                <strong>${diagnosis}</strong><br><br>
+                <strong>Recommendations:</strong><br>
+                ${advice.replace(/\n/g, '<br>')}<br><br>
+                <button class="ai-button" onclick="showPage('appointmentPage')" style="margin-top: 10px; padding: 8px;">📅 Book Appointment</button>
+            `;
+            resultDiv.style.display = 'block';
+        }
+        
+        // Book Appointment
+        function bookAppointment() {
+            const name = document.getElementById('patientName').value;
+            const phone = document.getElementById('patientPhone').value;
+            const doctor = document.getElementById('selectDoctor').value;
+            const date = document.getElementById('appointmentDate').value;
+            const reason = document.getElementById('appointmentReason').value;
+            
+            if (!name || !phone || !date) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Send booking via WhatsApp
+            const message = `📅 New Appointment Request\n\nName: ${name}\nPhone: ${phone}\nDoctor: ${doctor}\nDate: ${date}\nReason: ${reason}`;
+            window.open(`https://wa.me/959790123456?text=${encodeURIComponent(message)}`, '_blank');
+            
+            alert('✅ Appointment request sent! We will confirm shortly.');
+            
+            // Clear form
+            document.getElementById('patientName').value = '';
+            document.getElementById('patientPhone').value = '';
+            document.getElementById('appointmentReason').value = '';
+        }
+        
+        // Install PWA
+        let deferredPrompt;
+        
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        document.getElementById('installBanner').style.display = 'none';
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+        
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
