@@ -1,638 +1,104 @@
 <!DOCTYPE html>
-<html lang="my">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartHealth Clinic - AI-Powered Healthcare 2.0</title>
+    <title>SmartHealth Clinic - AI Healthcare App</title>
     <meta name="theme-color" content="#00A8E8">
-    <meta name="description" content="AI-Powered Clinic - Smart Healthcare for Myanmar">
+    <meta name="description" content="AI-Powered Healthcare for Myanmar">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
-            padding-bottom: 80px;
-            min-height: 100vh;
-        }
-        
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #00A8E8, #00D26A);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,168,232,0.3);
-        }
-        
-        .header h1 {
-            font-size: 28px;
-            margin-bottom: 5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .header p {
-            font-size: 14px;
-            opacity: 0.95;
-        }
-        
-        .header-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin-top: 10px;
-            backdrop-filter: blur(10px);
-        }
-        
-        /* AI Banner */
-        .ai-banner {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            margin: 20px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-        
-        .ai-icon {
-            font-size: 40px;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .ai-banner-content h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-        
-        .ai-banner-content p {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-        
-        /* Quick Actions */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 0 20px;
-            margin-bottom: 20px;
-        }
-        
-        .quick-action-btn {
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-        
-        .quick-action-btn:hover {
-            transform: translateY(-3px);
-            border-color: #00A8E8;
-            box-shadow: 0 8px 20px rgba(0,168,232,0.2);
-        }
-        
-        .quick-action-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-        
-        .quick-action-text {
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .section-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #333;
-            margin: 30px 0 15px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 24px;
-            background: linear-gradient(135deg, #00A8E8, #00D26A);
-            border-radius: 2px;
-        }
-        
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .service-card {
-            background: white;
-            padding: 25px 20px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        }
-        
-        .service-icon {
-            font-size: 44px;
-            margin-bottom: 12px;
-        }
-        
-        .service-name {
-            font-size: 15px;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .service-desc {
-            font-size: 12px;
-            color: #666;
-            margin-top: 8px;
-        }
-        
-        /* Doctors */
-        .doctors-list {
-            display: grid;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .doctor-card {
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-        }
-        
-        .doctor-card:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        }
-        
-        .doctor-avatar {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #00A8E8, #00D26A);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            flex-shrink: 0;
-        }
-        
-        .doctor-info {
-            flex: 1;
-        }
-        
-        .doctor-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        
-        .doctor-specialty {
-            font-size: 14px;
-            color: #00A8E8;
-            font-weight: 500;
-        }
-        
-        .doctor-experience {
-            font-size: 13px;
-            color: #666;
-            margin-top: 5px;
-        }
-        
-        .book-btn {
-            background: linear-gradient(135deg, #00A8E8, #00D26A);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .book-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0,168,232,0.3);
-        }
-        
-        /* AI Symptom Checker */
-        .symptom-checker {
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            margin: 20px 0;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            border: 2px solid #667eea;
-        }
-        
-        .symptom-checker-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .symptom-checker-header h3 {
-            font-size: 18px;
-            color: #333;
-        }
-        
-        .symptom-input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            font-size: 15px;
-            margin: 10px 0;
-            transition: all 0.3s;
-        }
-        
-        .symptom-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        
-        .ai-button {
-            width: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .ai-button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-        }
-        
-        .ai-button:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-        
-        .ai-result {
-            margin-top: 20px;
-            padding: 20px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 12px;
-            display: none;
-            border-left: 4px solid #667eea;
-        }
-        
-        .ai-result h4 {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .ai-result p {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        .severity-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-top: 10px;
-        }
-        
-        .severity-low {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .severity-medium {
-            background: #fff3cd;
-            color: #856404;
-        }
-        
-        .severity-high {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        
-        /* Health Tips */
-        .health-tips {
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            margin: 20px 0;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-        }
-        
-        .tip-card {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 20px;
-            border-radius: 12px;
-            margin: 15px 0;
-            border-left: 4px solid #00D26A;
-        }
-        
-        .tip-card h4 {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .tip-card p {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        /* Appointment Form */
-        .appointment-form {
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            margin: 20px 0;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-        }
-        
-        .form-group {
-            margin: 15px 0;
-        }
-        
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #00A8E8;
-            box-shadow: 0 0 0 3px rgba(0,168,232,0.1);
-        }
-        
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #00A8E8, #00D26A);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .submit-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,168,232,0.3);
-        }
-        
-        /* Bottom Nav */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-        
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            color: #666;
-            cursor: pointer;
-            transition: all 0.3s;
-            padding: 5px 15px;
-            border-radius: 8px;
-        }
-        
-        .nav-item:hover {
-            background: #f8f9fa;
-        }
-        
-        .nav-item.active {
-            color: #00A8E8;
-            background: rgba(0,168,232,0.1);
-        }
-        
-        .nav-icon {
-            font-size: 24px;
-        }
-        
-        .nav-text {
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Chat Bot */
-        .chatbot-btn {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 999;
-        }
-        
-        .chatbot-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        /* Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        
-        .stat-number {
-            font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #00A8E8, #00D26A);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .stat-label {
-            font-size: 12px;
-            color: #666;
-            margin-top: 5px;
-        }
-        
-        /* Pages */
-        .page {
-            display: none;
-        }
-        
-        .page.active {
-            display: block;
-        }
-        
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-100px);
-            background: white;
-            padding: 15px 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            z-index: 2000;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
-        
-        .toast-success {
-            border-left: 4px solid #00D26A;
-        }
-        
-        .toast-error {
-            border-left: 4px solid #dc3545;
-        }
+        *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+        body{background:linear-gradient(180deg,#f8f9fa 0%,#e9ecef 100%);padding-bottom:80px;min-height:100vh}
+        .header{background:linear-gradient(135deg,#00A8E8,#00D26A);color:white;padding:30px 20px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,168,232,0.3)}
+        .header h1{font-size:28px;margin-bottom:5px;text-shadow:0 2px 4px rgba(0,0,0,0.2)}
+        .header p{font-size:14px;opacity:0.95}
+        .header-badge{display:inline-block;background:rgba(255,255,255,0.2);padding:5px 15px;border-radius:20px;font-size:12px;margin-top:10px;backdrop-filter:blur(10px)}
+        .ai-banner{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:20px;margin:20px;border-radius:16px;display:flex;align-items:center;gap:15px;box-shadow:0 8px 24px rgba(102,126,234,0.4);animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+        .ai-icon{font-size:40px;animation:float 3s ease-in-out infinite}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        .ai-banner-content h3{font-size:18px;margin-bottom:5px}
+        .ai-banner-content p{font-size:13px;opacity:0.9}
+        .quick-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;padding:0 20px;margin-bottom:20px}
+        .quick-action-btn{background:white;padding:20px;border-radius:16px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.1);cursor:pointer;transition:all 0.3s;border:2px solid transparent}
+        .quick-action-btn:hover{transform:translateY(-3px);border-color:#00A8E8;box-shadow:0 8px 20px rgba(0,168,232,0.2)}
+        .quick-action-icon{font-size:32px;margin-bottom:10px}
+        .quick-action-text{font-size:14px;font-weight:600;color:#333}
+        .container{max-width:1200px;margin:0 auto;padding:20px}
+        .section-title{font-size:22px;font-weight:bold;color:#333;margin:30px 0 15px 0;display:flex;align-items:center;gap:10px}
+        .section-title::before{content:'';width:4px;height:24px;background:linear-gradient(135deg,#00A8E8,#00D26A);border-radius:2px}
+        .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:15px;margin-top:20px}
+        .service-card{background:white;padding:25px 20px;border-radius:16px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.08);transition:all 0.3s;cursor:pointer}
+        .service-card:hover{transform:translateY(-5px);box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+        .service-icon{font-size:44px;margin-bottom:12px}
+        .service-name{font-size:15px;font-weight:600;color:#333}
+        .service-desc{font-size:12px;color:#666;margin-top:8px}
+        .doctors-list{display:grid;gap:15px;margin-top:20px}
+        .doctor-card{background:white;padding:20px;border-radius:16px;display:flex;gap:20px;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,0.08);transition:all 0.3s}
+        .doctor-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+        .doctor-avatar{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#00A8E8,#00D26A);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+        .doctor-info{flex:1}
+        .doctor-name{font-size:18px;font-weight:bold;color:#333;margin-bottom:5px}
+        .doctor-specialty{font-size:14px;color:#00A8E8;font-weight:500}
+        .doctor-experience{font-size:13px;color:#666;margin-top:5px}
+        .book-btn{background:linear-gradient(135deg,#00A8E8,#00D26A);color:white;border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;transition:all 0.3s}
+        .book-btn:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(0,168,232,0.3)}
+        .symptom-checker{background:white;padding:25px;border-radius:16px;margin:20px 0;box-shadow:0 4px 16px rgba(0,0,0,0.1);border:2px solid #667eea}
+        .symptom-checker-header{display:flex;align-items:center;gap:10px;margin-bottom:15px}
+        .symptom-checker-header h3{font-size:18px;color:#333}
+        .symptom-input{width:100%;padding:15px;border:2px solid #e9ecef;border-radius:12px;font-size:15px;margin:10px 0;transition:all 0.3s}
+        .symptom-input:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,0.1)}
+        .ai-button{width:100%;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;padding:15px;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px}
+        .ai-button:hover{transform:scale(1.02);box-shadow:0 8px 20px rgba(102,126,234,0.3)}
+        .ai-button:disabled{opacity:0.7;cursor:not-allowed}
+        .ai-result{margin-top:20px;padding:20px;background:linear-gradient(135deg,#f8f9fa,#e9ecef);border-radius:12px;display:none;border-left:4px solid #667eea}
+        .ai-result h4{font-size:16px;color:#333;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+        .ai-result p{font-size:14px;color:#666;line-height:1.6}
+        .severity-badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;margin-top:10px}
+        .severity-low{background:#d4edda;color:#155724}
+        .severity-medium{background:#fff3cd;color:#856404}
+        .severity-high{background:#f8d7da;color:#721c24}
+        .health-tips{background:white;padding:25px;border-radius:16px;margin:20px 0;box-shadow:0 4px 16px rgba(0,0,0,0.1)}
+        .tip-card{background:linear-gradient(135deg,#f8f9fa,#e9ecef);padding:20px;border-radius:12px;margin:15px 0;border-left:4px solid #00D26A}
+        .tip-card h4{font-size:16px;color:#333;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+        .tip-card p{font-size:14px;color:#666;line-height:1.6}
+        .appointment-form{background:white;padding:25px;border-radius:16px;margin:20px 0;box-shadow:0 4px 16px rgba(0,0,0,0.1)}
+        .form-group{margin:15px 0}
+        .form-group label{display:block;font-size:14px;font-weight:600;color:#333;margin-bottom:8px}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:12px;border:2px solid #e9ecef;border-radius:8px;font-size:14px;transition:all 0.3s}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#00A8E8;box-shadow:0 0 0 3px rgba(0,168,232,0.1)}
+        .submit-btn{width:100%;background:linear-gradient(135deg,#00A8E8,#00D26A);color:white;border:none;padding:15px;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;transition:all 0.3s}
+        .submit-btn:hover{transform:scale(1.02);box-shadow:0 8px 20px rgba(0,168,232,0.3)}
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:10px 0;box-shadow:0 -4px 20px rgba(0,0,0,0.1);z-index:1000}
+        .nav-item{display:flex;flex-direction:column;align-items:center;gap:5px;color:#666;cursor:pointer;transition:all 0.3s;padding:5px 15px;border-radius:8px}
+        .nav-item:hover{background:#f8f9fa}
+        .nav-item.active{color:#00A8E8;background:rgba(0,168,232,0.1)}
+        .nav-icon{font-size:24px}
+        .nav-text{font-size:12px;font-weight:500}
+        .loading{display:inline-block;width:20px;height:20px;border:3px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:white;animation:spin 1s ease-in-out infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .chatbot-btn{position:fixed;bottom:90px;right:20px;width:60px;height:60px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 20px rgba(102,126,234,0.4);cursor:pointer;transition:all 0.3s;z-index:999}
+        .chatbot-btn:hover{transform:scale(1.1)}
+        .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:20px 0}
+        .stat-card{background:white;padding:20px;border-radius:12px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+        .stat-number{font-size:28px;font-weight:bold;background:linear-gradient(135deg,#00A8E8,#00D26A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .stat-label{font-size:12px;color:#666;margin-top:5px}
+        .page{display:none}
+        .page.active{display:block}
+        .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);background:white;padding:15px 25px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.2);z-index:2000;transition:all 0.3s;display:flex;align-items:center;gap:10px}
+        .toast.show{transform:translateX(-50%) translateY(0)}
+        .toast-success{border-left:4px solid #00D26A}
+        .toast-error{border-left:4px solid #dc3545}
     </style>
 </head>
 <body>
-    <!-- Header -->
     <div class="header">
         <h1>🏥 SmartHealth Clinic</h1>
         <p>AI-Powered Healthcare for Myanmar</p>
         <div class="header-badge">✨ AI 2.0 Enhanced</div>
     </div>
-
-    <!-- AI Banner -->
     <div class="ai-banner">
         <div class="ai-icon">🤖</div>
         <div class="ai-banner-content">
@@ -640,566 +106,106 @@
             <p>24/7 symptom analysis & health tips</p>
         </div>
     </div>
-
-    <!-- Quick Actions -->
     <div class="quick-actions">
-        <div class="quick-action-btn" onclick="showPage('symptom')">
-            <div class="quick-action-icon">🔍</div>
-            <div class="quick-action-text">AI Symptom Check</div>
-        </div>
-        <div class="quick-action-btn" onclick="showPage('appointments')">
-            <div class="quick-action-icon">📅</div>
-            <div class="quick-action-text">Book Appointment</div>
-        </div>
-        <div class="quick-action-btn" onclick="showPage('doctors')">
-            <div class="quick-action-icon">👨‍⚕️</div>
-            <div class="quick-action-text">Find Doctors</div>
-        </div>
-        <div class="quick-action-btn" onclick="showPage('tips')">
-            <div class="quick-action-icon">💡</div>
-            <div class="quick-action-text">Health Tips</div>
-        </div>
+        <div class="quick-action-btn" onclick="showPage('symptom')"><div class="quick-action-icon">🔍</div><div class="quick-action-text">AI Symptom Check</div></div>
+        <div class="quick-action-btn" onclick="showPage('appointments')"><div class="quick-action-icon">📅</div><div class="quick-action-text">Book Appointment</div></div>
+        <div class="quick-action-btn" onclick="showPage('doctors')"><div class="quick-action-icon">👨‍⚕️</div><div class="quick-action-text">Find Doctors</div></div>
+        <div class="quick-action-btn" onclick="showPage('tips')"><div class="quick-action-icon">💡</div><div class="quick-action-text">Health Tips</div></div>
     </div>
-
-    <!-- Home Page -->
     <div id="home" class="page active">
         <div class="container">
-            <!-- Stats -->
             <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">5K+</div>
-                    <div class="stat-label">Patients</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">12</div>
-                    <div class="stat-label">Doctors</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">AI Support</div>
-                </div>
+                <div class="stat-card"><div class="stat-number">5K+</div><div class="stat-label">Patients</div></div>
+                <div class="stat-card"><div class="stat-number">12</div><div class="stat-label">Doctors</div></div>
+                <div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label">AI Support</div></div>
             </div>
-
-            <!-- Services -->
             <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🩺</div>
-                    <div class="service-name">General Checkup</div>
-                    <div class="service-desc">Full health screening</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔬</div>
-                    <div class="service-name">Lab Tests</div>
-                    <div class="service-desc">Blood, urine & more</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💊</div>
-                    <div class="service-name">Pharmacy</div>
-                    <div class="service-desc">Medicine delivery</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🦷</div>
-                    <div class="service-name">Dental Care</div>
-                    <div class="service-desc">Teeth cleaning & more</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">👁️</div>
-                    <div class="service-name">Eye Care</div>
-                    <div class="service-desc">Vision tests & treatment</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">❤️</div>
-                    <div class="service-name">Cardiology</div>
-                    <div class="service-desc">Heart health checks</div>
-                </div>
+                <div class="service-card"><div class="service-icon">🩺</div><div class="service-name">General Checkup</div><div class="service-desc">Full health screening</div></div>
+                <div class="service-card"><div class="service-icon">🔬</div><div class="service-name">Lab Tests</div><div class="service-desc">Blood, urine & more</div></div>
+                <div class="service-card"><div class="service-icon">💊</div><div class="service-name">Pharmacy</div><div class="service-desc">Medicine delivery</div></div>
+                <div class="service-card"><div class="service-icon">🦷</div><div class="service-name">Dental Care</div><div class="service-desc">Teeth cleaning & more</div></div>
+                <div class="service-card"><div class="service-icon">👁️</div><div class="service-name">Eye Care</div><div class="service-desc">Vision tests & treatment</div></div>
+                <div class="service-card"><div class="service-icon">❤️</div><div class="service-name">Cardiology</div><div class="service-desc">Heart health checks</div></div>
             </div>
-
-            <!-- AI Symptom Checker -->
             <h2 class="section-title">🤖 AI Symptom Checker</h2>
             <div class="symptom-checker">
-                <div class="symptom-checker-header">
-                    <span style="font-size: 24px;">🔍</span>
-                    <h3>Describe Your Symptoms</h3>
-                </div>
+                <div class="symptom-checker-header"><span style="font-size:24px">🔍</span><h3>Describe Your Symptoms</h3></div>
                 <textarea class="symptom-input" id="symptomInput" rows="4" placeholder="Example: I have fever, headache, and body pain for 2 days..."></textarea>
-                <button class="ai-button" onclick="analyzeSymptoms()" id="analyzeBtn">
-                    <span>🤖</span>
-                    <span>Analyze with AI</span>
-                </button>
-                <div class="ai-result" id="symptomResult">
-                    <h4>📊 AI Analysis Result</h4>
-                    <p id="symptomAnalysis"></p>
-                    <div id="severityBadge"></div>
-                </div>
+                <button class="ai-button" onclick="analyzeSymptoms()" id="analyzeBtn"><span>🤖</span><span>Analyze with AI</span></button>
+                <div class="ai-result" id="symptomResult"><h4>📊 AI Analysis Result</h4><p id="symptomAnalysis"></p><div id="severityBadge"></div></div>
             </div>
-
-            <!-- Health Tips -->
             <h2 class="section-title">💡 AI Health Tips</h2>
             <div class="health-tips" id="healthTips">
-                <div class="tip-card">
-                    <h4>💧 Stay Hydrated</h4>
-                    <p>Drink at least 8 glasses of water daily. Proper hydration improves energy levels and brain function.</p>
-                </div>
-                <div class="tip-card">
-                    <h4>😴 Quality Sleep</h4>
-                    <p>Get 7-8 hours of sleep each night. Good sleep boosts immune system and mental health.</p>
-                </div>
-                <div class="tip-card">
-                    <h4>🏃 Regular Exercise</h4>
-                    <p>30 minutes of moderate exercise daily can reduce risk of chronic diseases by 40%.</p>
-                </div>
+                <div class="tip-card"><h4>💧 Stay Hydrated</h4><p>Drink at least 8 glasses of water daily. Proper hydration improves energy levels and brain function.</p></div>
+                <div class="tip-card"><h4>😴 Quality Sleep</h4><p>Get 7-8 hours of sleep each night. Good sleep boosts immune system and mental health.</p></div>
+                <div class="tip-card"><h4>🏃 Regular Exercise</h4><p>30 minutes of moderate exercise daily can reduce risk of chronic diseases by 40%.</p></div>
             </div>
         </div>
     </div>
-
-    <!-- Symptom Checker Page -->
     <div id="symptom" class="page">
         <div class="container">
             <h2 class="section-title">🤖 AI Symptom Analysis</h2>
             <div class="symptom-checker">
-                <div class="symptom-checker-header">
-                    <span style="font-size: 24px;">🔍</span>
-                    <h3>Tell Us What You're Feeling</h3>
-                </div>
-                <textarea class="symptom-input" id="symptomInputFull" rows="5" placeholder="Describe all your symptoms in detail...
-Example:
-- Fever: 38.5°C
-- Headache: Moderate
-- Body pain: Yes
-- Duration: 2 days
-- Other symptoms: Cough, fatigue"></textarea>
-                <button class="ai-button" onclick="analyzeSymptomsFull()" id="analyzeFullBtn">
-                    <span>🤖</span>
-                    <span>Analyze with AI</span>
-                </button>
-                <div class="ai-result" id="symptomResultFull">
-                    <h4>📊 AI Analysis Result</h4>
-                    <p id="symptomAnalysisFull"></p>
-                    <div id="severityBadgeFull"></div>
-                </div>
+                <div class="symptom-checker-header"><span style="font-size:24px">🔍</span><h3>Tell Us What You're Feeling</h3></div>
+                <textarea class="symptom-input" id="symptomInputFull" rows="5" placeholder="Describe all your symptoms in detail..."></textarea>
+                <button class="ai-button" onclick="analyzeSymptomsFull()" id="analyzeFullBtn"><span>🤖</span><span>Analyze with AI</span></button>
+                <div class="ai-result" id="symptomResultFull"><h4>📊 AI Analysis Result</h4><p id="symptomAnalysisFull"></p><div id="severityBadgeFull"></div></div>
             </div>
         </div>
     </div>
-
-    <!-- Appointments Page -->
     <div id="appointments" class="page">
         <div class="container">
             <h2 class="section-title">📅 Book Appointment</h2>
             <div class="appointment-form">
-                <div class="form-group">
-                    <label>Patient Name</label>
-                    <input type="text" id="patientName" placeholder="Enter your name">
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="tel" id="patientPhone" placeholder="09 XXX XXX XXX">
-                </div>
-                <div class="form-group">
-                    <label>Select Doctor</label>
-                    <select id="selectDoctor">
-                        <option value="">Choose a doctor...</option>
-                        <option value="dr-thant">Dr. Thant Zin - General Physician</option>
-                        <option value="dr-myu">Dr. Mya Mya - Cardiologist</option>
-                        <option value="dr-kyaw">Dr. Kyaw Kyaw - Dentist</option>
-                        <option value="dr-su">Dr. Su Su - Pediatrician</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Preferred Date</label>
-                    <input type="date" id="appointDate">
-                </div>
-                <div class="form-group">
-                    <label>Preferred Time</label>
-                    <select id="appointTime">
-                        <option value="">Choose time...</option>
-                        <option value="9:00 AM">9:00 AM</option>
-                        <option value="10:00 AM">10:00 AM</option>
-                        <option value="11:00 AM">11:00 AM</option>
-                        <option value="2:00 PM">2:00 PM</option>
-                        <option value="3:00 PM">3:00 PM</option>
-                        <option value="4:00 PM">4:00 PM</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Symptoms/Reason</label>
-                    <textarea id="appointReason" rows="3" placeholder="Briefly describe your symptoms..."></textarea>
-                </div>
-                <button class="submit-btn" onclick="bookAppointment()">
-                    📅 Book Appointment
-                </button>
+                <div class="form-group"><label>Patient Name</label><input type="text" id="patientName" placeholder="Enter your name"></div>
+                <div class="form-group"><label>Phone Number</label><input type="tel" id="patientPhone" placeholder="09 XXX XXX XXX"></div>
+                <div class="form-group"><label>Select Doctor</label><select id="selectDoctor"><option value="">Choose a doctor...</option><option value="dr-thant">Dr. Thant Zin - General Physician</option><option value="dr-myu">Dr. Mya Mya - Cardiologist</option><option value="dr-kyaw">Dr. Kyaw Kyaw - Dentist</option><option value="dr-su">Dr. Su Su - Pediatrician</option></select></div>
+                <div class="form-group"><label>Preferred Date</label><input type="date" id="appointDate"></div>
+                <div class="form-group"><label>Preferred Time</label><select id="appointTime"><option value="">Choose time...</option><option value="9:00 AM">9:00 AM</option><option value="10:00 AM">10:00 AM</option><option value="11:00 AM">11:00 AM</option><option value="2:00 PM">2:00 PM</option><option value="3:00 PM">3:00 PM</option><option value="4:00 PM">4:00 PM</option></select></div>
+                <div class="form-group"><label>Symptoms/Reason</label><textarea id="appointReason" rows="3" placeholder="Briefly describe your symptoms..."></textarea></div>
+                <button class="submit-btn" onclick="bookAppointment()">📅 Book Appointment</button>
             </div>
         </div>
     </div>
-
-    <!-- Doctors Page -->
     <div id="doctors" class="page">
         <div class="container">
             <h2 class="section-title">👨‍⚕️ Our Doctors</h2>
             <div class="doctors-list">
-                <div class="doctor-card">
-                    <div class="doctor-avatar">👨‍⚕️</div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr. Thant Zin</div>
-                        <div class="doctor-specialty">General Physician</div>
-                        <div class="doctor-experience">15 years experience</div>
-                    </div>
-                    <button class="book-btn" onclick="bookWithDoctor('Dr. Thant Zin')">Book</button>
-                </div>
-                <div class="doctor-card">
-                    <div class="doctor-avatar">👩‍⚕️</div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr. Mya Mya</div>
-                        <div class="doctor-specialty">Cardiologist</div>
-                        <div class="doctor-experience">12 years experience</div>
-                    </div>
-                    <button class="book-btn" onclick="bookWithDoctor('Dr. Mya Mya')">Book</button>
-                </div>
-                <div class="doctor-card">
-                    <div class="doctor-avatar">👨‍⚕️</div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr. Kyaw Kyaw</div>
-                        <div class="doctor-specialty">Dentist</div>
-                        <div class="doctor-experience">10 years experience</div>
-                    </div>
-                    <button class="book-btn" onclick="bookWithDoctor('Dr. Kyaw Kyaw')">Book</button>
-                </div>
-                <div class="doctor-card">
-                    <div class="doctor-avatar">👩‍⚕️</div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr. Su Su</div>
-                        <div class="doctor-specialty">Pediatrician</div>
-                        <div class="doctor-experience">8 years experience</div>
-                    </div>
-                    <button class="book-btn" onclick="bookWithDoctor('Dr. Su Su')">Book</button>
-                </div>
+                <div class="doctor-card"><div class="doctor-avatar">👨‍⚕️</div><div class="doctor-info"><div class="doctor-name">Dr. Thant Zin</div><div class="doctor-specialty">General Physician</div><div class="doctor-experience">15 years experience</div></div><button class="book-btn" onclick="bookWithDoctor('Dr. Thant Zin')">Book</button></div>
+                <div class="doctor-card"><div class="doctor-avatar">👩‍⚕️</div><div class="doctor-info"><div class="doctor-name">Dr. Mya Mya</div><div class="doctor-specialty">Cardiologist</div><div class="doctor-experience">12 years experience</div></div><button class="book-btn" onclick="bookWithDoctor('Dr. Mya Mya')">Book</button></div>
+                <div class="doctor-card"><div class="doctor-avatar">👨‍⚕️</div><div class="doctor-info"><div class="doctor-name">Dr. Kyaw Kyaw</div><div class="doctor-specialty">Dentist</div><div class="doctor-experience">10 years experience</div></div><button class="book-btn" onclick="bookWithDoctor('Dr. Kyaw Kyaw')">Book</button></div>
+                <div class="doctor-card"><div class="doctor-avatar">👩‍⚕️</div><div class="doctor-info"><div class="doctor-name">Dr. Su Su</div><div class="doctor-specialty">Pediatrician</div><div class="doctor-experience">8 years experience</div></div><button class="book-btn" onclick="bookWithDoctor('Dr. Su Su')">Book</button></div>
             </div>
         </div>
     </div>
-
-    <!-- Health Tips Page -->
     <div id="tips" class="page">
         <div class="container">
             <h2 class="section-title">💡 AI Health Tips</h2>
-            <div class="health-tips" id="healthTipsFull">
-                <div class="tip-card">
-                    <h4>💧 Stay Hydrated</h4>
-                    <p>Drink at least 8 glasses of water daily. Proper hydration improves energy levels and brain function.</p>
-                </div>
-                <div class="tip-card">
-                    <h4>😴 Quality Sleep</h4>
-                    <p>Get 7-8 hours of sleep each night. Good sleep boosts immune system and mental health.</p>
-                </div>
-                <div class="tip-card">
-                    <h4>🏃 Regular Exercise</h4>
-                    <p>30 minutes of moderate exercise daily can reduce risk of chronic diseases by 40%.</p>
-                </div>
-                <div class="tip-card">
-                    <h4>🥗 Balanced Diet</h4>
-                    <p>Eat plenty of fruits, vegetables, whole grains, and lean proteins. Limit processed foods and sugar.</p>
-                </div>
-                <div class="tip-card">
-                    <h4>🧘 Stress Management</h4>
-                    <p>Practice meditation, deep breathing, or yoga. Chronic stress can lead to serious health issues.</p>
-                </div>
-            </div>
-            <button class="ai-button" onclick="generateNewTips()" style="margin-top: 20px;">
-                🔄 Generate New Tips with AI
-            </button>
+            <div class="health-tips" id="healthTipsFull"></div>
+            <button class="ai-button" onclick="generateNewTips()" style="margin-top:20px">🔄 Generate New Tips with AI</button>
         </div>
     </div>
-
-    <!-- Chatbot Button -->
-    <div class="chatbot-btn" onclick="toggleChat()">
-        💬
-    </div>
-
-    <!-- Bottom Navigation -->
+    <div class="chatbot-btn" onclick="toggleChat()">💬</div>
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="showPage('home')" id="nav-home">
-            <div class="nav-icon">🏠</div>
-            <div class="nav-text">Home</div>
-        </div>
-        <div class="nav-item" onclick="showPage('symptom')" id="nav-symptom">
-            <div class="nav-icon">🔍</div>
-            <div class="nav-text">Symptom</div>
-        </div>
-        <div class="nav-item" onclick="showPage('appointments')" id="nav-appointments">
-            <div class="nav-icon">📅</div>
-            <div class="nav-text">Appointments</div>
-        </div>
-        <div class="nav-item" onclick="showPage('doctors')" id="nav-doctors">
-            <div class="nav-icon">👨‍⚕️</div>
-            <div class="nav-text">Doctors</div>
-        </div>
-        <div class="nav-item" onclick="showPage('tips')" id="nav-tips">
-            <div class="nav-icon">💡</div>
-            <div class="nav-text">Tips</div>
-        </div>
+        <div class="nav-item active" onclick="showPage('home')" id="nav-home"><div class="nav-icon">🏠</div><div class="nav-text">Home</div></div>
+        <div class="nav-item" onclick="showPage('symptom')" id="nav-symptom"><div class="nav-icon">🔍</div><div class="nav-text">Symptom</div></div>
+        <div class="nav-item" onclick="showPage('appointments')" id="nav-appointments"><div class="nav-icon">📅</div><div class="nav-text">Appointments</div></div>
+        <div class="nav-item" onclick="showPage('doctors')" id="nav-doctors"><div class="nav-icon">👨‍⚕️</div><div class="nav-text">Doctors</div></div>
+        <div class="nav-item" onclick="showPage('tips')" id="nav-tips"><div class="nav-icon">💡</div><div class="nav-text">Tips</div></div>
     </div>
-
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <span id="toastIcon">✅</span>
-        <span id="toastMessage">Success!</span>
-    </div>
-
+    <div class="toast" id="toast"><span id="toastIcon">✅</span><span id="toastMessage">Success!</span></div>
     <script>
-        // AI Symptom Database
-        const symptomDatabase = {
-            'fever': {
-                conditions: ['Common Cold', 'Flu', 'Dengue Fever', 'Malaria'],
-                advice: 'Rest, stay hydrated, take paracetamol. If fever persists >3 days, see a doctor.',
-                severity: 'medium'
-            },
-            'headache': {
-                conditions: ['Tension Headache', 'Migraine', 'Dehydration', 'Eye Strain'],
-                advice: 'Rest in quiet room, drink water, avoid screens. Consider pain relief if severe.',
-                severity: 'low'
-            },
-            'cough': {
-                conditions: ['Common Cold', 'Bronchitis', 'Allergies', 'COVID-19'],
-                advice: 'Stay hydrated, use humidifier, avoid irritants. See doctor if coughing blood.',
-                severity: 'low'
-            },
-            'body pain': {
-                conditions: ['Flu', 'Overexertion', 'Viral Infection', 'Dengue'],
-                advice: 'Rest, gentle stretching, warm bath. Take pain relief if needed.',
-                severity: 'medium'
-            },
-            'stomach pain': {
-                conditions: ['Indigestion', 'Gastritis', 'Food Poisoning', 'Appendicitis'],
-                advice: 'Avoid spicy food, drink clear fluids. Seek immediate care if severe.',
-                severity: 'medium'
-            },
-            'fatigue': {
-                conditions: ['Anemia', 'Thyroid Issues', 'Depression', 'Chronic Fatigue'],
-                advice: 'Get adequate sleep, eat iron-rich foods, exercise regularly.',
-                severity: 'low'
-            }
-        };
-
-        // Page Navigation
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Update nav
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.getElementById('nav-' + pageId).classList.add('active');
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // AI Symptom Analysis
-        async function analyzeSymptoms() {
-            const input = document.getElementById('symptomInput').value.toLowerCase();
-            const btn = document.getElementById('analyzeBtn');
-            const result = document.getElementById('symptomResult');
-            const analysis = document.getElementById('symptomAnalysis');
-            const badge = document.getElementById('severityBadge');
-            
-            if (!input.trim()) {
-                showToast('Please describe your symptoms', 'error');
-                return;
-            }
-            
-            // Show loading
-            btn.disabled = true;
-            btn.innerHTML = '<span class="loading"></span> Analyzing...';
-            
-            // Simulate AI analysis
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // Analyze symptoms
-            let foundConditions = [];
-            let maxSeverity = 'low';
-            
-            for (const [symptom, data] of Object.entries(symptomDatabase)) {
-                if (input.includes(symptom)) {
-                    foundConditions.push(...data.conditions);
-                    if (data.severity === 'high') maxSeverity = 'high';
-                    else if (data.severity === 'medium' && maxSeverity !== 'high') maxSeverity = 'medium';
-                }
-            }
-            
-            if (foundConditions.length === 0) {
-                foundConditions = ['General Discomfort'];
-                analysis.innerHTML = 'Based on your symptoms, we recommend consulting with a doctor for proper diagnosis. Please book an appointment for detailed examination.';
-            } else {
-                const uniqueConditions = [...new Set(foundConditions)];
-                analysis.innerHTML = `
-                    <strong>Possible Conditions:</strong><br>
-                    ${uniqueConditions.slice(0, 3).map(c => `• ${c}`).join('<br>')}<br><br>
-                    <strong>AI Recommendation:</strong><br>
-                    ${symptomDatabase[Object.keys(symptomDatabase).find(k => input.includes(k))]?.advice || 'Please consult with a doctor for proper diagnosis.'}
-                `;
-            }
-            
-            // Set severity badge
-            badge.innerHTML = `<span class="severity-badge severity-${maxSeverity}">${maxSeverity.toUpperCase()} SEVERITY</span>`;
-            
-            // Show result
-            result.style.display = 'block';
-            
-            // Reset button
-            btn.disabled = false;
-            btn.innerHTML = '<span>🤖</span><span>Analyze with AI</span>';
-            
-            showToast('Analysis complete!', 'success');
-        }
-
-        // Full Symptom Analysis
-        async function analyzeSymptomsFull() {
-            const input = document.getElementById('symptomInputFull').value.toLowerCase();
-            const btn = document.getElementById('analyzeFullBtn');
-            const result = document.getElementById('symptomResultFull');
-            const analysis = document.getElementById('symptomAnalysisFull');
-            const badge = document.getElementById('severityBadgeFull');
-            
-            if (!input.trim()) {
-                showToast('Please describe your symptoms', 'error');
-                return;
-            }
-            
-            btn.disabled = true;
-            btn.innerHTML = '<span class="loading"></span> Analyzing...';
-            
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            let foundConditions = [];
-            let maxSeverity = 'low';
-            
-            for (const [symptom, data] of Object.entries(symptomDatabase)) {
-                if (input.includes(symptom)) {
-                    foundConditions.push(...data.conditions);
-                    if (data.severity === 'high') maxSeverity = 'high';
-                    else if (data.severity === 'medium' && maxSeverity !== 'high') maxSeverity = 'medium';
-                }
-            }
-            
-            if (foundConditions.length === 0) {
-                analysis.innerHTML = 'Based on your symptoms, we recommend consulting with a doctor for proper diagnosis. Please book an appointment for detailed examination.';
-            } else {
-                const uniqueConditions = [...new Set(foundConditions)];
-                analysis.innerHTML = `
-                    <strong>🔍 Possible Conditions:</strong><br>
-                    ${uniqueConditions.slice(0, 5).map(c => `• ${c}`).join('<br>')}<br><br>
-                    <strong>💡 AI Recommendation:</strong><br>
-                    ${symptomDatabase[Object.keys(symptomDatabase).find(k => input.includes(k))]?.advice || 'Please consult with a doctor for proper diagnosis.'}<br><br>
-                    <strong>⚠️ When to See a Doctor:</strong><br>
-                    • Symptoms persist >3 days<br>
-                    • High fever (>39°C)<br>
-                    • Severe pain<br>
-                    • Difficulty breathing
-                `;
-            }
-            
-            badge.innerHTML = `<span class="severity-badge severity-${maxSeverity}">${maxSeverity.toUpperCase()} SEVERITY</span>`;
-            result.style.display = 'block';
-            
-            btn.disabled = false;
-            btn.innerHTML = '<span>🤖</span><span>Analyze with AI</span>';
-            
-            showToast('Analysis complete!', 'success');
-        }
-
-        // Book Appointment
-        function bookAppointment() {
-            const name = document.getElementById('patientName').value;
-            const phone = document.getElementById('patientPhone').value;
-            const doctor = document.getElementById('selectDoctor').value;
-            const date = document.getElementById('appointDate').value;
-            const time = document.getElementById('appointTime').value;
-            
-            if (!name || !phone || !doctor || !date || !time) {
-                showToast('Please fill all fields', 'error');
-                return;
-            }
-            
-            // Simulate booking
-            showToast('Appointment booked successfully!', 'success');
-            
-            // Clear form
-            document.getElementById('patientName').value = '';
-            document.getElementById('patientPhone').value = '';
-            document.getElementById('selectDoctor').value = '';
-            document.getElementById('appointDate').value = '';
-            document.getElementById('appointTime').value = '';
-            document.getElementById('appointReason').value = '';
-            
-            // In real app, send to backend
-            console.log('Appointment:', { name, phone, doctor, date, time });
-        }
-
-        // Book with Doctor
-        function bookWithDoctor(doctorName) {
-            showPage('appointments');
-            document.getElementById('selectDoctor').value = 'dr-' + doctorName.toLowerCase().replace(' ', '-');
-            showToast(`Selected ${doctorName}`, 'success');
-        }
-
-        // Generate New Tips
-        function generateNewTips() {
-            const tipsContainer = document.getElementById('healthTipsFull');
-            
-            const newTips = [
-                { title: '🍎 Eat Colorful Foods', content: 'Different colored fruits and vegetables provide various nutrients. Aim for a rainbow on your plate!' },
-                { title: '🚶 Walk Daily', content: '10,000 steps daily can improve cardiovascular health and reduce stress levels significantly.' },
-                { title: '📱 Digital Detox', content: 'Limit screen time before bed. Blue light affects sleep quality and melatonin production.' },
-                { title: '🤝 Social Connection', content: 'Maintain strong social bonds. Loneliness can impact mental and physical health.' },
-                { title: '🧠 Mental Exercise', content: 'Challenge your brain with puzzles, reading, or learning new skills to maintain cognitive function.' }
-            ];
-            
-            tipsContainer.innerHTML = newTips.map(tip => `
-                <div class="tip-card">
-                    <h4>${tip.title}</h4>
-                    <p>${tip.content}</p>
-                </div>
-            `).join('');
-            
-            showToast('New tips generated!', 'success');
-        }
-
-        // Toggle Chat
-        function toggleChat() {
-            showToast('AI Chatbot coming soon!', 'success');
-        }
-
-        // Toast Notification
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastIcon = document.getElementById('toastIcon');
-            const toastMessage = document.getElementById('toastMessage');
-            
-            toastIcon.textContent = type === 'success' ? '✅' : '❌';
-            toastMessage.textContent = message;
-            toast.className = 'toast show toast-' + type;
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set min date to today
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('appointDate').min = today;
-            
-            // Register service worker
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('sw.js');
-            }
-        });
+        const symptomDatabase={fever:{conditions:['Common Cold','Flu','Dengue Fever','Malaria'],advice:'Rest, stay hydrated, take paracetamol. If fever persists >3 days, see a doctor.',severity:'medium'},headache:{conditions:['Tension Headache','Migraine','Dehydration','Eye Strain'],advice:'Rest in quiet room, drink water, avoid screens. Consider pain relief if severe.',severity:'low'},cough:{conditions:['Common Cold','Bronchitis','Allergies','COVID-19'],advice:'Stay hydrated, use humidifier, avoid irritants. See doctor if coughing blood.',severity:'low'},'body pain':{conditions:['Flu','Overexertion','Viral Infection','Dengue'],advice:'Rest, gentle stretching, warm bath. Take pain relief if needed.',severity:'medium'},'stomach pain':{conditions:['Indigestion','Gastritis','Food Poisoning','Appendicitis'],advice:'Avoid spicy food, drink clear fluids. Seek immediate care if severe.',severity:'medium'},fatigue:{conditions:['Anemia','Thyroid Issues','Depression','Chronic Fatigue'],advice:'Get adequate sleep, eat iron-rich foods, exercise regularly.',severity:'low'}};
+        function showPage(pageId){document.querySelectorAll('.page').forEach(page=>page.classList.remove('active'));document.getElementById(pageId).classList.add('active');document.querySelectorAll('.nav-item').forEach(item=>item.classList.remove('active'));document.getElementById('nav-'+pageId).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+        async function analyzeSymptoms(){const input=document.getElementById('symptomInput').value.toLowerCase();const btn=document.getElementById('analyzeBtn');const result=document.getElementById('symptomResult');const analysis=document.getElementById('symptomAnalysis');const badge=document.getElementById('severityBadge');if(!input.trim()){showToast('Please describe your symptoms','error');return}btn.disabled=true;btn.innerHTML='<span class="loading"></span> Analyzing...';await new Promise(resolve=>setTimeout(resolve,2000));let foundConditions=[];let maxSeverity='low';for(const[symptom,data]of Object.entries(symptomDatabase)){if(input.includes(symptom)){foundConditions.push(...data.conditions);if(data.severity==='high')maxSeverity='high';else if(data.severity==='medium'&&maxSeverity!=='high')maxSeverity='medium'}}if(foundConditions.length===0){analysis.innerHTML='Based on your symptoms, we recommend consulting with a doctor for proper diagnosis. Please book an appointment for detailed examination.'}else{const uniqueConditions=[...new Set(foundConditions)];analysis.innerHTML=`<strong>Possible Conditions:</strong><br>${uniqueConditions.slice(0,3).map(c=>'• '+c).join('<br>')}<br><br><strong>AI Recommendation:</strong><br>${symptomDatabase[Object.keys(symptomDatabase).find(k=>input.includes(k))]?.advice||'Please consult with a doctor for proper diagnosis.'}`}badge.innerHTML=`<span class="severity-badge severity-${maxSeverity}">${maxSeverity.toUpperCase()} SEVERITY</span>`;result.style.display='block';btn.disabled=false;btn.innerHTML='<span>🤖</span><span>Analyze with AI</span>';showToast('Analysis complete!','success')}
+        async function analyzeSymptomsFull(){const input=document.getElementById('symptomInputFull').value.toLowerCase();const btn=document.getElementById('analyzeFullBtn');const result=document.getElementById('symptomResultFull');const analysis=document.getElementById('symptomAnalysisFull');const badge=document.getElementById('severityBadgeFull');if(!input.trim()){showToast('Please describe your symptoms','error');return}btn.disabled=true;btn.innerHTML='<span class="loading"></span> Analyzing...';await new Promise(resolve=>setTimeout(resolve,2000));let foundConditions=[];let maxSeverity='low';for(const[symptom,data]of Object.entries(symptomDatabase)){if(input.includes(symptom)){foundConditions.push(...data.conditions);if(data.severity==='high')maxSeverity='high';else if(data.severity==='medium'&&maxSeverity!=='high')maxSeverity='medium'}}if(foundConditions.length===0){analysis.innerHTML='Based on your symptoms, we recommend consulting with a doctor for proper diagnosis. Please book an appointment for detailed examination.'}else{const uniqueConditions=[...new Set(foundConditions)];analysis.innerHTML=`<strong>🔍 Possible Conditions:</strong><br>${uniqueConditions.slice(0,5).map(c=>'• '+c).join('<br>')}<br><br><strong>💡 AI Recommendation:</strong><br>${symptomDatabase[Object.keys(symptomDatabase).find(k=>input.includes(k))]?.advice||'Please consult with a doctor for proper diagnosis.'}<br><br><strong>⚠️ When to See a Doctor:</strong><br>• Symptoms persist >3 days<br>• High fever (>39°C)<br>• Severe pain<br>• Difficulty breathing`}badge.innerHTML=`<span class="severity-badge severity-${maxSeverity}">${maxSeverity.toUpperCase()} SEVERITY</span>`;result.style.display='block';btn.disabled=false;btn.innerHTML='<span>🤖</span><span>Analyze with AI</span>';showToast('Analysis complete!','success')}
+        function bookAppointment(){const name=document.getElementById('patientName').value;const phone=document.getElementById('patientPhone').value;const doctor=document.getElementById('selectDoctor').value;const date=document.getElementById('appointDate').value;const time=document.getElementById('appointTime').value;if(!name||!phone||!doctor||!date||!time){showToast('Please fill all fields','error');return}showToast('Appointment booked successfully!','success');document.getElementById('patientName').value='';document.getElementById('patientPhone').value='';document.getElementById('selectDoctor').value='';document.getElementById('appointDate').value='';document.getElementById('appointTime').value='';document.getElementById('appointReason').value='';console.log('Appointment:',{name,phone,doctor,date,time})}
+        function bookWithDoctor(doctorName){showPage('appointments');document.getElementById('selectDoctor').value='dr-'+doctorName.toLowerCase().replace(' ','-');showToast(`Selected ${doctorName}`,'success')}
+        function generateNewTips(){const tipsContainer=document.getElementById('healthTipsFull');const newTips=[{title:'🍎 Eat Colorful Foods',content:'Different colored fruits and vegetables provide various nutrients. Aim for a rainbow on your plate!'},{title:'🚶 Walk Daily',content:'10,000 steps daily can improve cardiovascular health and reduce stress levels significantly.'},{title:'📱 Digital Detox',content:'Limit screen time before bed. Blue light affects sleep quality and melatonin production.'},{title:'🤝 Social Connection',content:'Maintain strong social bonds. Loneliness can impact mental and physical health.'},{title:'🧠 Mental Exercise',content:'Challenge your brain with puzzles, reading, or learning new skills to maintain cognitive function.'}];tipsContainer.innerHTML=newTips.map(tip=>`<div class="tip-card"><h4>${tip.title}</h4><p>${tip.content}</p></div>`).join('');showToast('New tips generated!','success')}
+        function toggleChat(){showToast('AI Chatbot coming soon!','success')}
+        function showToast(message,type='success'){const toast=document.getElementById('toast');const toastIcon=document.getElementById('toastIcon');const toastMessage=document.getElementById('toastMessage');toastIcon.textContent=type==='success'?'✅':'❌';toastMessage.textContent=message;toast.className='toast show toast-'+type;setTimeout(()=>{toast.classList.remove('show')},3000)}
+        document.addEventListener('DOMContentLoaded',()=>{const today=new Date().toISOString().split('T')[0];document.getElementById('appointDate').min=today;if('serviceWorker'in navigator){navigator.serviceWorker.register('sw.js')}});
     </script>
 </body>
 </html>
